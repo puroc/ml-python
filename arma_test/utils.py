@@ -7,6 +7,9 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from pylab import *
 
+
+TIME_FORMAT = "%Y/%m/%d %H:%M:%S"
+
 # 导入csv数据
 def import_ts(path,index_col,ts_col):
     data = pd.read_csv(path, index_col=index_col)
@@ -73,3 +76,6 @@ def revert(diffValues, *lastValue):
             result.append(lv)
         diffValues = result
     return diffValues
+
+def add_min(current_time,min):
+    return (datetime.datetime.strptime(current_time, TIME_FORMAT) + datetime.timedelta(minutes=min)).strftime(TIME_FORMAT)
