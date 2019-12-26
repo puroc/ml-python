@@ -21,7 +21,8 @@ def draw_trend(timeSeries, size):
     # 对size个数据进行移动平均
     rol_mean = timeSeries.rolling(window=size).mean()
     # 对size个数据进行加权移动平均
-    rol_weighted_mean = pd.ewma(timeSeries, span=size)
+    rol_weighted_mean = pd.DataFrame.ewm(timeSeries, span=60).mean()
+    # rol_weighted_mean = pd.ewma(timeSeries, span=size)
 
     timeSeries.plot(color='blue', label='Original')
     rol_mean.plot(color='red', label='Rolling Mean')
@@ -31,10 +32,17 @@ def draw_trend(timeSeries, size):
     plt.show()
 
 # 画图
-def draw_ts(timeSeries):
+def draw_ts(timeSeries,title):
     f = plt.figure(facecolor='white')
     plt.plot(timeSeries,color='blue')
-    plt.title('原始数据')
+    plt.title(title)
+    plt.show()
+
+def draw_two_data(data1,data2,title):
+    f = plt.figure(facecolor='white')
+    plt.plot(data1,color='blue')
+    plt.plot(data2,color='red')
+    plt.title(title)
     plt.show()
 
 # 单位根ADF检验
@@ -54,3 +62,14 @@ def draw_acf_pacf(ts, lags=31):
     ax2 = f.add_subplot(212)
     plot_pacf(ts, lags=31, ax=ax2)
     plt.show()
+
+#将差分值进行还原
+def revert(diffValues, *lastValue):
+    for i in range(len(lastValue)):
+        result = []
+        lv = lastValue[i]
+        for dv in diffValues:
+            lv = dv + lv
+            result.append(lv)
+        diffValues = result
+    return diffValues
