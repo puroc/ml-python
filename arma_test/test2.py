@@ -2,7 +2,7 @@ from arma_test.utils import *
 import statsmodels as sm
 import statsmodels.tsa.stattools as st
 import pandas as pd
-import datetime,time
+import datetime, time
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 rcParams['figure.figsize'] = 10, 5
@@ -39,16 +39,17 @@ score = 1 - delta.var() / diff.var()
 
 draw_two_data(diff, ARMAmodel.fittedvalues, "模型曲线和一阶差分曲线")
 
-
 forecast_num = 10000
 
 # 输入起始时间和结束时间，进行数据预测（差分后的值，需要进行还原）
 p = ARMAmodel.predict()
+
 f = ARMAmodel.forecast(steps=forecast_num)[0]
 # p = ARMAmodel.predict(start=pd.to_datetime('2019/2/16 12:30:00'), end=pd.to_datetime('2019/7/8 13:45:00'))
 
-# 一阶差分还原
-result_p = revert(p, 754749.0)
+# 一阶差分还原，给原始数据第一个数，还原后的第一个数应该对应的是第二个时间点
+result_p = revert(p, 571383.0)
+# 一阶差分还原，给原始数据最后一个数，还原后的第一个数应该对应的是预测的第一个时间点
 result_f = revert(f, 754749.0)
 
 # 转换
@@ -62,22 +63,33 @@ from pandas import Series, DataFrame
 # result_f_df = DataFrame(result_f_ts, columns=["ts", "value"])
 
 result_f_df = pd.DataFrame(columns=["ts", "value"])
+result_p_df = pd.DataFrame(columns=["ts", "value"])
 
 forecast_start_time = "2019/7/8 14:30:00"
 forecast_time = forecast_start_time
 for i in range(forecast_num):
     # 加15分钟
-    forecast_time = add_min(forecast_time,15)
+    forecast_time = add_min(forecast_time, 15)
     result_f_df = result_f_df.append({"ts": forecast_time, "value": result_f[i]}, ignore_index=True)
 
 result_f_series = pd.Series(result_f_df['value'].values, index=result_f_df['ts'])
 result_f_series.index = pd.to_datetime(result_f_series.index)
 
+# 取原始数据的第一个时间点
+predict_start_time = "2019/2/16 12:30:00"
+predict_time = predict_start_time
+primitive_data_len = len(ts)
+# 因为predict是根据一阶差分之后的数据进行预测的，所以会比原始数据少一个。如果是二阶差分就会少两个，以此类推
+for i in range(primitive_data_len - 1):
+    # 基于原始数据的第一个时间点加15分钟，即等于原始数据的第二个时间点，pridict还原后的第一个数据是与第二个时间点对应的
+    predict_time = add_min(predict_time, 15)
+    result_p_df = result_p_df.append({"ts": predict_time, "value": result_p[i]}, ignore_index=True)
 
-# result_p_series = p.shift(1)
-#
-# result_series = result_p_series.add(result_f_series)
-#
-# draw_ts(result_series,"结果")
+result_p_series = pd.Series(result_p_df['value'].values, index=result_p_df['ts'])
+result_p_series.index = pd.to_datetime(result_p_series.index)
 
-draw_two_data(ts, result_f_series, "原始数据和预测结果")
+result_series = result_p_series.append(result_f_series)
+
+draw_ts(result_series, "预测数据")
+
+draw_two_data(ts, result_series, "原始数据和预测结果")
