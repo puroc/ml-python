@@ -27,8 +27,8 @@ adf2 = testStationarity(diff)
 ic = st.arma_order_select_ic(diff, max_ar=2, max_ma=2, ic=['aic', 'bic', 'hqic'])
 
 # 得到最佳p值和q值
-# order=ic.aic_min_order
-order = (2, 2)
+order=ic.aic_min_order
+# order = (2, 2)
 
 # ARMA模型建模和训练
 ARMAmodel = st.ARMA(diff, order).fit()
