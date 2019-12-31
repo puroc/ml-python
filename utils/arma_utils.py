@@ -1,22 +1,8 @@
-import numpy as np
 import pandas as pd
-from datetime import datetime
-import matplotlib.pylab as plt
-from matplotlib.pylab import rcParams
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from pylab import *
 
-
-TIME_FORMAT = "%Y/%m/%d %H:%M:%S"
-
-# 导入csv数据
-def import_ts(path,index_col,ts_col):
-    data = pd.read_csv(path, index_col=index_col)
-    # data = pd.read_csv('/Users/puroc/Desktop/arma/659.csv', index_col='ts')
-    ts = data[ts_col]
-    ts.index = pd.to_datetime(ts.index)
-    return ts
 
 # 移动平均图
 def draw_trend(timeSeries, size):
@@ -34,19 +20,7 @@ def draw_trend(timeSeries, size):
     plt.title('Rolling Mean')
     plt.show()
 
-# 画图
-def draw_ts(timeSeries,title):
-    f = plt.figure(facecolor='white')
-    plt.plot(timeSeries,color='blue')
-    plt.title(title)
-    plt.show()
 
-def draw_two_data(data1,data2,title):
-    f = plt.figure(facecolor='white')
-    plt.plot(data1,color='blue')
-    plt.plot(data2,color='red')
-    plt.title(title)
-    plt.show()
 
 # 单位根ADF检验
 def testStationarity(timeSeries):
@@ -77,5 +51,3 @@ def revert(diffValues, *lastValue):
         diffValues = result
     return diffValues
 
-def add_min(current_time,min):
-    return (datetime.datetime.strptime(current_time, TIME_FORMAT) + datetime.timedelta(minutes=min)).strftime(TIME_FORMAT)

@@ -1,14 +1,15 @@
-from arma_test.utils import *
-import statsmodels as sm
+from utils.arma_utils import testStationarity, revert, rcParams, plt
+from utils.file_utils import load_csv
+from utils.pic_utils import draw_ts, draw_two_data
+from utils.time_utils import add_min
 import statsmodels.tsa.stattools as st
 import pandas as pd
-import datetime, time
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 rcParams['figure.figsize'] = 10, 5
 
 # 导入原始数据
-ts = import_ts('/Users/puroc/Desktop/arma/659.csv', 'ts', 'value')
+ts = load_csv('/Users/puroc/PycharmProjects/ml-python/arma_test/data/659.csv', 'ts', 'value')
 draw_ts(ts, '原始数据')
 
 # 对原始数据进行平稳性检验

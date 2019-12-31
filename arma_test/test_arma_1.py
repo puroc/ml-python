@@ -1,10 +1,12 @@
-from arma_test.utils import *
+from utils.arma_utils import draw_acf_pacf, testStationarity, draw_trend, np, plt, rcParams
+from utils.file_utils import load_csv
+from utils.pic_utils import draw_ts
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 rcParams['figure.figsize'] = 10, 5
 
 # 导入原始数据
-ts = import_ts('/Users/puroc/Desktop/arma/659.csv', 'ts', 'total')
+ts = load_csv('/Users/puroc/PycharmProjects/ml-python/arma_test/data/659.csv', 'ts', 'value')
 draw_ts(ts,'原始数据')
 draw_acf_pacf(ts)
 adf1 = testStationarity(ts)
