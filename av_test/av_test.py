@@ -16,11 +16,7 @@ ts2 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/20191112.csv
 draw_ts(ts2,'2019年11月12日原始数据')
 ts2_1  = ts2.diff().dropna()
 draw_ts(ts2_1,'2019年11月12日一阶差分')
-ts2_2  = ts2.diff(2).dropna()
-ts2_2 = np.random.randn(100)
-result = normaltest(ts2_2, axis=None)
-ts2_2 =pd.Series(ts2_2)
-
+ts2_2  = ts2_1.diff().dropna()
 draw_ts(ts2_2,'2019年11月12日二阶差分')
 
 ts3 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/20191113.csv', 'ts', 'forwardflow')
@@ -70,7 +66,8 @@ plt.show()
 # ts2_2 = np.random.randn(10, 20)
 
 # result = kstest(ts2_2, 'norm')
-
+result = normaltest(ts2_2, axis=None)
+print(ts2_2.describe())
 
 #
 # result = anderson(ts2_2)
