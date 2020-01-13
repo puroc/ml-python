@@ -15,15 +15,15 @@ rcParams['figure.figsize'] = 10, 5
 #
 # draw_two_data(ts1,ts2,'对比')
 
-ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/1100HD72004012A17/1100HD72004012A17_201911.csv', 'ts', 'forward_flow_before')
-
-ts2 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/1100HD72004012A17/1100HD72004012A17_201911.csv', 'ts', 'forward_flow_after')
-
-draw_ts(ts1,'before')
-
-draw_ts(ts2,'after')
-
-draw_two_data(ts1,ts2,'对比')
+# ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/1100HD72004012A17/1100HD72004012A17_201911.csv', 'ts', 'forward_flow_before')
+#
+# ts2 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/1100HD72004012A17/1100HD72004012A17_201911.csv', 'ts', 'forward_flow_after')
+#
+# draw_ts(ts1,'before')
+#
+# draw_ts(ts2,'after')
+#
+# draw_two_data(ts1,ts2,'对比')
 
 
 # ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000003100000001/11000003100000001_201911.csv', 'ts', 'forward_flow_before')
@@ -35,6 +35,37 @@ draw_two_data(ts1,ts2,'对比')
 # draw_ts(ts2,'after')
 #
 # draw_two_data(ts1,ts2,'对比')
+
+
+ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000103100000001/11000103100000001_2019-12-12.csv', 'ts', 'forwardflow')
+draw_ts(ts1,'浙江和达流量计2019年11月11日')
+
+ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000103100000001/11000103100000001_2019-12-13.csv', 'ts', 'forwardflow')
+draw_ts(ts1,'浙江和达流量计2019年11月12日')
+
+ts3 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000103100000001/11000103100000001_2019-12-14.csv', 'ts', 'forwardflow')
+draw_ts(ts3,'浙江和达流量计2019年11月13日')
+
+ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000103100000001/11000103100000001_2019-12-15.csv', 'ts', 'forwardflow')
+draw_ts(ts1,'浙江和达流量计2019年11月14日')
+
+ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000103100000001/11000103100000001_2019-12-16.csv', 'ts', 'forwardflow')
+draw_ts(ts1,'浙江和达流量计2019年11月15日')
+
+# ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000023100000002/11000023100000002_2019-12-12.csv', 'ts', 'forwardflow')
+# draw_ts(ts1,'浙江和达流量计2019年11月11日')
+#
+# ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000023100000002/11000023100000002_2019-12-13.csv', 'ts', 'forwardflow')
+# draw_ts(ts1,'浙江和达流量计2019年11月12日')
+#
+# ts3 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000023100000002/11000023100000002_2019-12-14.csv', 'ts', 'forwardflow')
+# draw_ts(ts3,'浙江和达流量计2019年11月13日')
+#
+# ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000023100000002/11000023100000002_2019-12-15.csv', 'ts', 'forwardflow')
+# draw_ts(ts1,'浙江和达流量计2019年11月14日')
+#
+# ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/11000023100000002/11000023100000002_2019-12-16.csv', 'ts', 'forwardflow')
+# draw_ts(ts1,'浙江和达流量计2019年11月15日')
 
 # ts1 = load_csv('/Users/puroc/PycharmProjects/ml-python/av_test/data/浙江和达流量计/1100HD72004014A13/1100HD72004014A13_20191111.csv', 'ts', 'forwardflow')
 # draw_ts(ts1,'浙江和达流量计2019年11月11日')
